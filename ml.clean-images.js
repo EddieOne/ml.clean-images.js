@@ -10,7 +10,7 @@ var count = 0;
 
 walker.on('file', function(root, stat, next) {
   jimp.read(root + '/' + stat.name, (err, image) => {
-    if (err) {
+    if (err || image._originalMime.search('image/gif') != -1) {
       fs.unlinkSync(root + '/' + stat.name);
       console.log('Deleting ' + stat.name)
     }
